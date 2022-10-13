@@ -1,0 +1,19 @@
+.lotti{
+  position: absolute;
+  left: 45%;
+  top: 45%;
+  justify-content: space-around;
+  align-content: center;
+  text-align: center;
+  width: 120px;
+  height: 120px;
+}
+
+#conteneurLoad {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.747);
+}
+
