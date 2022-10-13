@@ -2,15 +2,16 @@
 
 function sendData(className, method, action, redirection = false) {
     const inputTexteListe = document.getElementsByClassName(className);
-    const methode = document.getElementsByClassName(method);
-    const endpoint = document.getElementsByClassName(action);
+    const methode =method;
+    const endpoint = action;
     const redirect = (redirection) ? redirection : false;
+    let error = false;
 
 
     let TableOfInputText = ['text', 'password', 'date', 'tel', 'number', 'range'];
 
     let data = new FormData();
-    
+
     for (let i = 0; i < inputTexteListe.length; i++) {
         let input = inputTexteListe[i];
 
@@ -27,6 +28,7 @@ function sendData(className, method, action, redirection = false) {
             }
             else {
                 ErrorOrSuccessAlert('error', name)
+                error = true
                 break;
             }
         }
@@ -49,7 +51,7 @@ function sendData(className, method, action, redirection = false) {
                     data.append(nomInput, input.files[0]);
                 }
             }
-            else{
+            else {
                 ErrorOrSuccessAlert('error', name)
             }
 
@@ -62,12 +64,39 @@ function sendData(className, method, action, redirection = false) {
             }
             else {
                 ErrorOrSuccessAlert('error', name)
+                error = true
                 break;
             }
         }
     }
 
-    // sendDataAlert();
+
+    setTimeout(() => {
+        if (error === false) {
+
+
+            sendDataAlert()
+            $.ajax({
+                url: endpoint,
+                type: methode,
+                data: data,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+
+                complete: (xhr, status) => {
+
+                    SuccessAlert('success')
+                },
+                success: (result, status, xhr) => {
+                    SuccessAlert(res)
+                },
+                error: (xhr, status, error) => {
+                    ErrorAlert('erreur lors de la connexion')
+                }
+            })
+        }
+    }, 2000)
 }
 
 
@@ -80,8 +109,8 @@ function ErrorOrSuccessAlert(etat, champ = false) {
         showCloseButton: false,
         showConfirmButton: false,
         timerProgressBar: true,
-        allowOutsideClick: false,
-        timer: 1300
+       
+        timer: 3000
     })
 }
 
@@ -94,7 +123,7 @@ function sendDataAlert() {
         showCloseButton: false,
         showConfirmButton: false,
         timerProgressBar: true,
-        allowOutsideClick: false,
+       
         timer: 1500
     })
 }
@@ -109,7 +138,7 @@ function SuccessAlert(res) {
         showCloseButton: false,
         showConfirmButton: false,
         timerProgressBar: true,
-        allowOutsideClick: false,
+       
         timer: 1500
     })
 }
@@ -124,7 +153,7 @@ function ErrorAlert(res) {
         showCloseButton: false,
         showConfirmButton: false,
         timerProgressBar: true,
-        allowOutsideClick: false,
+       
         timer: 1500
     })
 }
