@@ -10,7 +10,7 @@ function sendData(className, method, action, redirection = false) {
     let TableOfInputText = ['text', 'password', 'date', 'tel', 'number', 'range'];
 
     let data = new FormData();
-    console.log(inputTexteListe)
+    
     for (let i = 0; i < inputTexteListe.length; i++) {
         let input = inputTexteListe[i];
 
@@ -66,6 +66,8 @@ function sendData(className, method, action, redirection = false) {
             }
         }
     }
+
+    // sendDataAlert();
 }
 
 
@@ -75,6 +77,50 @@ function ErrorOrSuccessAlert(etat, champ = false) {
         toast: true,
         position: 'top-end',
         text: `Le champ ${champ} n'est pas valide ou est vide`,
+        showCloseButton: false,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        allowOutsideClick: false,
+        timer: 1300
+    })
+}
+
+
+function sendDataAlert() {
+    Swal.fire({
+        toast: true,
+        position: 'top-end',
+        text: `Vos données sont en cours de tratement`,
+        showCloseButton: false,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        allowOutsideClick: false,
+        timer: 1500
+    })
+}
+
+
+function SuccessAlert(res) {
+    Swal.fire({
+        icon: `success`,
+        toast: true,
+        position: 'top-end',
+        text: ` ${res} `,
+        showCloseButton: false,
+        showConfirmButton: false,
+        timerProgressBar: true,
+        allowOutsideClick: false,
+        timer: 1500
+    })
+}
+
+
+function ErrorAlert(res) {
+    Swal.fire({
+        icon: `error`,
+        toast: true,
+        position: 'top-end',
+        text: `${res} `,
         showCloseButton: false,
         showConfirmButton: false,
         timerProgressBar: true,
