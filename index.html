@@ -1,81 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fomulaire</title>
-    <link rel="stylesheet" href="./public/css/bootstrap.min.css" />
-   <script src="./public/js/sweetalert2@11"></script>
-  </head>
-  <body>
-    
-    <div class="row mx-3 px-auto ">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fomulaire</title>
+  <link rel="stylesheet" href="./public/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./public/css/load.css">
+  <script src="./public/js/sweetalert2@11"></script>
+</head>
+
+<body>
+
+  <div class="row mx-3 px-auto ">
     <div class="row align-content-middle justify-content-center d-none" id="conteneurLoad">
-      <!-- <div class="loader" id='loader'></div> -->
-      <div class="lotti" id="chargement">
-        <!--lottiefiles DE CHARGEMENT  -->
-        <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_wfsunjgd.json" background="transparent"
-          speed="1" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
+      <div class="custom-loader" id='loader'></div>
 
-      </div>
-
-      <div class="d-none lotti" id="successe">
-        <!--lottiefiles DE SUCCESS  -->
-        <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_p1laie4m.json" background="transparent"
-          speed="0.5" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
-
-      </div>
     </div>
 
 
-      <div class="col-md-6 mx-auto">
-        <!-- premier formulaire  -->
-        <div class="row">
-          <div class="card mt-4 mx-2">
-            <div class="card-body">
-              <div class="card-text">
-                <form enctype="multipart/form-data">
-                  <!--  action="./api/save.php" method="post" class="form" id="formulaire" -->
-                  <h3>Informations de connexion</h3>
-                  <div class="form-group">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" name="email" id="email"  class="form-control loginInput" placeholder="Votre mail" required/>
-                  </div>
+    <div class="col-md-6 mx-auto">
+      <!-- premier formulaire  -->
+      <div class="row">
+        <div class="card mt-4 mx-2">
+          <div class="card-body">
+            <div class="card-text">
+              <form enctype="multipart/form-data">
+                <!--  action="./api/save.php" method="post" class="form" id="formulaire" -->
+                <h3>Informations de connexion</h3>
+                <div class="form-group">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" name="email" id="email" class="form-control loginInput" placeholder="Votre mail"
+                    required />
+                </div>
 
-                  <div class="form-group">
-                    <label for="pseudo" class="form-label">Pseudo</label>
-                    <input type="text" name="pseudo" id="username"  class="form-control loginInput" placeholder="Votre pseudo en un seule mot" required/>
-                  </div>
+                <div class="form-group">
+                  <label for="pseudo" class="form-label">Pseudo</label>
+                  <input type="text" name="pseudo" id="username" class="form-control loginInput"
+                    placeholder="Votre pseudo en un seule mot" required />
+                </div>
 
-                  <div class="form-group">
-                    <label for="password" class="form-label">Mot de passe</label>
-                    <input type="password" name="password" id="password"  class="form-control loginInput" placeholder="Votre mot de passe" minlength="8" required/>
-                  </div>
+                <div class="form-group">
+                  <label for="password" class="form-label">Mot de passe</label>
+                  <input type="password" name="password" id="password" class="form-control loginInput"
+                    placeholder="Votre mot de passe" minlength="8" required />
+                </div>
 
-                  <div class="form-group">
-                    <label for="file" class="form-label">Fichier</label>
-                    <input type="file" name="file" id="" class="form-control loginInput">
-                  </div>
+                <div class="form-group">
+                  <label for="file" class="form-label">Fichier</label>
+                  <input type="file" name="file" id="" class="form-control loginInput">
+                </div>
 
-                  
-                  <div class="form-group my-2">
-                   <button type='button' class="btn btn-success loginInput" name="action" value="action" id="submit" onclick="sendData('loginInput', 'post', './api/select.php')">Envoyer</button>
-                  </div>
-                </form>
-              </div>
+                <div class="form-group">
+                  <label for="file" class="form-label">Description</label>
+                  <textarea name="description" id="description" cols="30" rows="10"
+                    class="form-control loginInput"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="file" class="form-label">amie</label>
+                  <select name="amie" id="amie" class="form-select loginInput">
+                    <option value="adv">adv</option>
+                    <option value="anne">anne</option>
+                    <option value="hami">hami</option>
+                  </select>
+                </div>
+
+
+                <div class="form-group my-2">
+                  <button type='button' class="btn btn-success loginInput" name="action" value="action" id="submit"
+                    onclick="sendData('loginInput', 'post', './api/select.php')">Envoyer</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-
-        <!-- Premier formulaire fin -->
- 
       </div>
-    </div>
 
-    <script src="./public/js/bootstrap.min.js"></script>
-    <script src="./public/js/jquery.min.js"></script>
-     <script src="./public/js/newjsfile.js"></script>
-    
-  </body>
+      <!-- Premier formulaire fin -->
+
+    </div>
+  </div>
+
+  <script src="./public/js/bootstrap.min.js"></script>
+  <script src="./public/js/jquery.min.js"></script>
+  <script src="./public/js/newjsfile.js"></script>
+
+</body>
+
 </html>

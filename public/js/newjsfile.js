@@ -1,6 +1,10 @@
 
 
 function sendData(className, method, action, redirection = false) {
+
+    let loader = document.getElementById('conteneurLoad');
+    
+
     const inputTexteListe = document.getElementsByClassName(className);
     const methode =method;
     const endpoint = action;
@@ -13,6 +17,7 @@ function sendData(className, method, action, redirection = false) {
     let data = new FormData();
 
     for (let i = 0; i < inputTexteListe.length; i++) {
+
         let input = inputTexteListe[i];
 
         let inputType = input.getAttribute('type');
@@ -68,11 +73,50 @@ function sendData(className, method, action, redirection = false) {
                 break;
             }
         }
+        else if(input.tagName==='TEXTAREA'){
+            // console.log(input.tagName)
+            let value = input.value;
+            if (value != '') {
+                data.append(name, value)
+            }
+            else {
+                ErrorOrSuccessAlert('error', name)
+                error = true
+                break;
+            }
+        }
+        else if(input.tagName==='BUTTON'){
+            let value = input.value;
+            if (value != '') {
+                data.append(name, value)
+            }
+            else {
+                ErrorOrSuccessAlert('error', name)
+                error = true
+                break;
+            }
+
+            
+        }
+        else if(input.tagName=== 'SELECT'){
+
+            let value = input.value;
+            if (value != '') {
+                data.append(name, value)
+            }
+            else {
+                ErrorOrSuccessAlert('error', name)
+                error = true
+                break;
+            }
+        }
     }
 
 
     setTimeout(() => {
+        
         if (error === false) {
+            loader.classList.contains('d-none')?loader.classList.remove('d-none'):'';
 
 
             sendDataAlert()
@@ -86,17 +130,20 @@ function sendData(className, method, action, redirection = false) {
 
                 complete: (xhr, status) => {
 
+                    loader.classList.contains('d-none')?"":loader.classList.add('d-none');
                     SuccessAlert('success')
                 },
                 success: (result, status, xhr) => {
-                    SuccessAlert(res)
+                    loader.classList.contains('d-none')?"":loader.classList.add('d-none');
+                    SuccessAlert(result)
                 },
                 error: (xhr, status, error) => {
+                    loader.classList.contains('d-none')?"":loader.classList.add('d-none');
                     ErrorAlert('erreur lors de la connexion')
                 }
             })
         }
-    }, 2000)
+    }, 500)
 }
 
 
