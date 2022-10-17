@@ -105,7 +105,8 @@ function sendData(className, method, action, redirection = false) {
                 data.append(name, value)
             }
             else {
-                ErrorOrSuccessAlert('error', name)
+                let errormessage = `Veillez bien selectionner une option dans la liste`
+                ErrorOrSuccessAlert('error', name,errormessage)
                 error = true
                 break;
             }
@@ -147,12 +148,13 @@ function sendData(className, method, action, redirection = false) {
 }
 
 
-function ErrorOrSuccessAlert(etat, champ = false) {
+function ErrorOrSuccessAlert(etat, champ = false,texte='') {
+    let message = (texte==='')?`Le champ ${champ} n'est pas valide ou est vide`:texte;
     Swal.fire({
         icon: `${etat}`,
         toast: true,
         position: 'top-end',
-        text: `Le champ ${champ} n'est pas valide ou est vide`,
+        text: message,
         showCloseButton: false,
         showConfirmButton: false,
         timerProgressBar: true,
