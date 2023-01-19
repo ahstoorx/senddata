@@ -22,7 +22,9 @@ function sendData(className, method, action, redirection = false) {
 
         let inputType = input.getAttribute('type');
         let id = input.getAttribute('id');
-        let name = input.getAttribute('name');
+        let name = id;//input.getAttribute('name');
+        let listAttribute = input.attributes;
+        let nbrAttribute = listAttribute.length;
 
         if (TableOfInputText.includes(inputType)) {
 
@@ -68,6 +70,8 @@ function sendData(className, method, action, redirection = false) {
                 data.append(name, input.value);
             }
             else {
+                input.setAttribute('style','border-color:"red"');
+                // input.classList.add('border-danger')
                 ErrorOrSuccessAlert('error', name)
                 error = true
                 break;
@@ -149,6 +153,7 @@ function sendData(className, method, action, redirection = false) {
 
 
 function ErrorOrSuccessAlert(etat, champ = false,texte='') {
+    document.getElementById(champ).classList.add('border-danger')
     let message = (texte==='')?`Le champ ${champ} n'est pas valide ou est vide`:texte;
     Swal.fire({
         icon: `${etat}`,
@@ -158,9 +163,12 @@ function ErrorOrSuccessAlert(etat, champ = false,texte='') {
         showCloseButton: false,
         showConfirmButton: false,
         timerProgressBar: true,
-       
         timer: 3000
     })
+    setTimeout(()=>{
+            document.getElementById(champ).classList.contains('border-danger')?document.getElementById(champ).classList.remove('border-danger'):'';
+
+    },3000)
 }
 
 
@@ -202,8 +210,9 @@ function ErrorAlert(res) {
         showCloseButton: false,
         showConfirmButton: false,
         timerProgressBar: true,
-       
         timer: 1500
     })
 }
+
+
 
